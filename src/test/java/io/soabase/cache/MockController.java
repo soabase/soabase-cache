@@ -1,17 +1,17 @@
 package io.soabase.cache;
 
 import io.soabase.cache.annotations.CacheKey;
-import io.soabase.cache.annotations.Cached;
-import io.soabase.cache.annotations.ClearsCache;
+import io.soabase.cache.annotations.Cache;
+import io.soabase.cache.annotations.CacheClear;
 
 public interface MockController
 {
-    @Cached
+    @Cache
     long getValue();
 
-    @Cached
+    @Cache
     long makeValue(@CacheKey int plus);
 
-    @ClearsCache
+    @CacheClear
     void clear();
 }

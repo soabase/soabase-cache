@@ -1,7 +1,5 @@
 package io.soabase.cache;
 
-import io.soabase.cache.annotations.Cached;
-import io.soabase.cache.annotations.ClearsCache;
 import java.util.Random;
 
 public class MockControllerImpl implements MockController

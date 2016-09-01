@@ -3,8 +3,8 @@ package io.soabase.cache;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.Reflection;
 import io.soabase.cache.annotations.CacheKey;
-import io.soabase.cache.annotations.Cached;
-import io.soabase.cache.annotations.ClearsCache;
+import io.soabase.cache.annotations.Cache;
+import io.soabase.cache.annotations.CacheClear;
 import io.soabase.cache.keys.KeyPart;
 import io.soabase.cache.keys.KeyPartCombiner;
 import io.soabase.cache.keys.StandardKeyPartCombiner;
@@ -28,19 +28,19 @@ public class CachingControllerBuilder
     {
         CacheKey classCacheKey = iface.getAnnotation(CacheKey.class);
         InvocationHandler handler = (proxy, method, args) -> {
-            ClearsCache clearsCache = method.getAnnotation(ClearsCache.class);
-            Cached cached = method.getAnnotation(Cached.class);
-            if ( (clearsCache != null) || (cached != null) )
+            CacheClear cacheClear = method.getAnnotation(CacheClear.class);
+            Cache cache = method.getAnnotation(Cache.class);
+            if ( (cacheClear != null) || (cache != null) )
             {
                 List<KeyPart> keyParts = getKeyParts(classCacheKey, method, args);
                 String key = combiner.toKey(keyParts);
 
-                if ( clearsCache != null )
+                if ( cacheClear != null )
                 {
                     cacheController.invalidate(key);
                 }
 
-                if ( cached != null )
+                if ( cache != null )
                 {
                     return cacheController.get(key, () -> method.invoke(parentController, args));
                 }
