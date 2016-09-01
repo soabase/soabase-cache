@@ -1,19 +1,15 @@
 package io.soabase.cache.memory;
 
-import com.google.common.base.Joiner;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import io.soabase.cache.CacheKeyAccessor;
-import io.soabase.cache.CacheKeyMaker;
 import io.soabase.cache.spi.CacheController;
-import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MemoryCacheController implements CacheController
 {
-    private final Cache<Object, Object> cache;
+    private final Cache<String, Object> cache;
 
     public MemoryCacheController(long cacheExpirationTime, TimeUnit timeUnit)
     {
@@ -21,7 +17,7 @@ public class MemoryCacheController implements CacheController
     }
 
     @Override
-    public <T> T get(Object key, Callable<? extends T> valueLoader)
+    public <T> T get(String key, Callable<? extends T> valueLoader)
     {
         try
         {
@@ -35,7 +31,7 @@ public class MemoryCacheController implements CacheController
     }
 
     @Override
-    public void invalidate(Object key)
+    public void invalidate(String key)
     {
         cache.invalidate(key);
     }
@@ -44,11 +40,5 @@ public class MemoryCacheController implements CacheController
     public void invalidateAll()
     {
         cache.invalidateAll();
-    }
-
-    @Override
-    public String makeKey(String value, Method method, Object[] args)
-    {
-        return CacheKeyMaker.makeKey(value, method, args);
     }
 }

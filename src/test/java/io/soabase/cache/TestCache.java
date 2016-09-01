@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestCache
 {
-    private static final int cacheTtlMs = 1000;
+    private static final int cacheTtlMs = 100000;
     private CacheController cacheController;
 
     @Before
