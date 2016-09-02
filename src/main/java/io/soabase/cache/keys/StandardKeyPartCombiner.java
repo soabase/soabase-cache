@@ -33,6 +33,7 @@ public class StandardKeyPartCombiner implements KeyPartCombiner
                 }
 
                 case TYPE:
+                case METHOD:
                 {
                     return part.getValue().isEmpty() ? part.getElementValue() : part.getValue();
                 }
