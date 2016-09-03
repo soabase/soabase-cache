@@ -42,6 +42,10 @@ public class CachingControllerBuilder
 
                 if ( cache != null )
                 {
+                    if ( method.getReturnType().equals(Void.TYPE) )
+                    {
+                        throw new UnsupportedOperationException("Methods marked with @Cache cannot must return a value");
+                    }
                     return cacheBackingStore.get(key, () -> method.invoke(parentController, args));
                 }
             }
