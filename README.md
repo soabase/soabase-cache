@@ -55,3 +55,12 @@ Soabase Cache is available from Maven Central
 ## Details
 
 #### Annotations
+
+##### `@Cache`
+Marks that the annotated method's return value is to be cached. See below for details on how the cache key is generated.
+
+##### `@CacheClear`
+Marks that the annotated method's value is cleared from the cache. See below for details on how the cache key is generated.
+
+##### `@CacheKey`
+Controls how cache keys are generated (see below). Can be applied to Interfaces, methods and/or parameters.
