@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/soabase/soabase-cache.svg?branch=master)](https://travis-ci.org/soabase/soabase-cache)
+[![Maven Central](https://img.shields.io/maven-central/v/io.soabase/soabase-cache.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.soabase%22%20AND%20a%3A%22soabase-cache%22)
+
 # soabase-cache
 Simple caching proxy that integrates with [Dropwizard](http://www.dropwizard.io/1.0.0/docs/)
 
