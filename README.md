@@ -14,7 +14,7 @@ Simple caching proxy that integrates with [Dropwizard](http://www.dropwizard.io/
 3. Allocate a `CacheBackingStore` instance either directly or using `CacheBackingStoreFactory`
 4. Create the cache proxy using `CachingControllerBuilder`
 
-_Simple Example_
+#### Simple Example
 
 ```java
 ...
@@ -43,3 +43,15 @@ Person p = container.get(id); // next call to container.get with the same ID wil
 
 container.put(newP, id);  // clears the cache entry for id
 ```
+
+## Group/Artifact
+
+Soabase Cache is available from Maven Central
+
+| GroupId | ArtifactId |
+| ------- | ---------- |
+| io.soabase | soabase-cache |
+
+## Details
+
+#### Annotations
