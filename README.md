@@ -52,7 +52,7 @@ Soabase Cache is available from Maven Central
 | ------- | ---------- |
 | io.soabase | soabase-cache |
 
-## Details
+## Reference
 
 #### Annotations
 
@@ -75,3 +75,6 @@ A list of "key parts" is generated and then combined to create the cache key.
 
 The key parts are combined using the configured `KeyPartCombiner`. The `StandardKeyPartCombiner` joins all the parts separated with a `-` (dash).
 
+#### Backing Store
+
+The actual caching of objects is done by the configured `CacheBackingStore`. The library comes with `MemoryCacheBackingStore` which stores objects in a [Guava](https://github.com/google/guava) Cache Map. 
