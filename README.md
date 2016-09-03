@@ -81,3 +81,7 @@ The key parts are combined using the configured `KeyPartCombiner`. The `Standard
 #### Backing Store
 
 The actual caching of objects is done by the configured `CacheBackingStore`. The library comes with `MemoryCacheBackingStore` which stores objects in a [Guava](https://github.com/google/guava) Cache Map. 
+
+#### CacheKeyAccessor
+
+To get the value of a method parameter, `String.valueOf()` is called. However, the object can implement `CacheKeyAccessor` to provide a custom key value.
