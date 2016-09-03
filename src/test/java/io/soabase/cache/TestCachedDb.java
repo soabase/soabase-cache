@@ -6,7 +6,7 @@ import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.soabase.cache.memory.MemoryCacheController;
+import io.soabase.cache.memory.MemoryCacheBackingStore;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,7 +50,7 @@ public class TestCachedDb
     @Test
     public void testCachedDb()
     {
-        MemoryCacheController cache = new MemoryCacheController(cacheTtlMs, TimeUnit.MILLISECONDS);
+        MemoryCacheBackingStore cache = new MemoryCacheBackingStore(cacheTtlMs, TimeUnit.MILLISECONDS);
         DbController cachedController = CachingControllerBuilder.build(cache, controller, DbController.class);
 
         cachedController.add(1, "one");

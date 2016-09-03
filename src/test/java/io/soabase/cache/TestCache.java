@@ -1,7 +1,7 @@
 package io.soabase.cache;
 
-import io.soabase.cache.memory.MemoryCacheController;
-import io.soabase.cache.spi.CacheController;
+import io.soabase.cache.memory.MemoryCacheBackingStore;
+import io.soabase.cache.spi.CacheBackingStore;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,25 +11,25 @@ import java.util.concurrent.TimeUnit;
 public class TestCache
 {
     private static final int cacheTtlMs = 100000;
-    private CacheController cacheController;
+    private CacheBackingStore cacheBackingStore;
 
     @Before
     public void setup()
     {
-        cacheController = new MemoryCacheController(cacheTtlMs, TimeUnit.MILLISECONDS);
+        cacheBackingStore = new MemoryCacheBackingStore(cacheTtlMs, TimeUnit.MILLISECONDS);
     }
 
     @After
     public void cleanUp()
     {
-        cacheController.invalidateAll();
+        cacheBackingStore.invalidateAll();
     }
 
     @Test
     public void testCache()
     {
         MockController realController = new MockControllerImpl();
-        MockController controller = CachingControllerBuilder.build(cacheController, realController, MockController.class);
+        MockController controller = CachingControllerBuilder.build(cacheBackingStore, realController, MockController.class);
         long value = controller.getValue();
         long madeValue = controller.makeValue(10);
         Assert.assertEquals(value, controller.getValue());

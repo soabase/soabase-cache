@@ -2,16 +2,16 @@ package io.soabase.cache.memory;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import io.soabase.cache.spi.CacheController;
+import io.soabase.cache.spi.CacheBackingStore;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class MemoryCacheController implements CacheController
+public class MemoryCacheBackingStore implements CacheBackingStore
 {
     private final Cache<String, Object> cache;
 
-    public MemoryCacheController(long cacheExpirationTime, TimeUnit timeUnit)
+    public MemoryCacheBackingStore(long cacheExpirationTime, TimeUnit timeUnit)
     {
         cache = CacheBuilder.newBuilder().softValues().expireAfterWrite(cacheExpirationTime, timeUnit).build();
     }

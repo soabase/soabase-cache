@@ -8,7 +8,7 @@ import io.soabase.cache.annotations.CacheClear;
 import io.soabase.cache.keys.KeyPart;
 import io.soabase.cache.keys.KeyPartCombiner;
 import io.soabase.cache.keys.StandardKeyPartCombiner;
-import io.soabase.cache.spi.CacheController;
+import io.soabase.cache.spi.CacheBackingStore;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.reflect.InvocationHandler;
@@ -19,12 +19,12 @@ import java.util.Optional;
 
 public class CachingControllerBuilder
 {
-    public static <T> T build(CacheController cacheController, T parentController, Class<T> iface)
+    public static <T> T build(CacheBackingStore cacheBackingStore, T parentController, Class<T> iface)
     {
-        return build(cacheController, parentController, iface, StandardKeyPartCombiner.instance);
+        return build(cacheBackingStore, parentController, iface, StandardKeyPartCombiner.instance);
     }
 
-    public static <T> T build(CacheController cacheController, T parentController, Class<T> iface, KeyPartCombiner combiner)
+    public static <T> T build(CacheBackingStore cacheBackingStore, T parentController, Class<T> iface, KeyPartCombiner combiner)
     {
         CacheKey classCacheKey = iface.getAnnotation(CacheKey.class);
         InvocationHandler handler = (proxy, method, args) -> {
@@ -37,12 +37,12 @@ public class CachingControllerBuilder
 
                 if ( cacheClear != null )
                 {
-                    cacheController.invalidate(key);
+                    cacheBackingStore.invalidate(key);
                 }
 
                 if ( cache != null )
                 {
-                    return cacheController.get(key, () -> method.invoke(parentController, args));
+                    return cacheBackingStore.get(key, () -> method.invoke(parentController, args));
                 }
             }
 

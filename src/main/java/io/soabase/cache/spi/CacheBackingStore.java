@@ -2,7 +2,7 @@ package io.soabase.cache.spi;
 
 import java.util.concurrent.Callable;
 
-public interface CacheController
+public interface CacheBackingStore
 {
     <T> T get(String key, Callable<? extends T> valueLoader);
 

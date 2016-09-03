@@ -1,1 +1,1 @@
-io.soabase.cache.spi.CacheControllerFactory
+io.soabase.cache.spi.CacheBackingStoreFactory
