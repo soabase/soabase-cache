@@ -10,6 +10,18 @@
     <artifactId>soabase-cache</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
+    <scm>
+        <url>https://github.com/soabase/soabase-cache</url>
+        <connection>scm:git:https://github.com/soabase/soabase-cache.git</connection>
+        <developerConnection>scm:git:git@github.com:soabase/soabase-cache.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/soabase/soabase-cache/issues</url>
+    </issueManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -34,4 +46,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
