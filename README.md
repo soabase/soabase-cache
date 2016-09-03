@@ -64,3 +64,14 @@ Marks that the annotated method's value is cleared from the cache. See below for
 
 ##### `@CacheKey`
 Controls how cache keys are generated (see below). Can be applied to Interfaces, methods and/or parameters.
+
+#### Key Generation
+
+A list of "key parts" is generated and then combined to create the cache key.
+
+* *Part 0* - Part 0 is based on the Interface name. If the Interface is annotated with `@CacheKey` and the annotation value is not an empty string, that value is used as Part 0. Otherwise, The Interface's full name is used.
+* *Part 1* - Part 1 is based on the Method. If the method is annotated with `@CacheKey`, Part 1 is either the annotation value or the method name if the annotation value is an empty string. If the method is _not_ annotated with `@CacheKey` then there is no Part 1.
+* *Parts 1+* - The remaining parts consist of any parameters annotated with `@CacheKey`. The value is a concatenation of the annotation value and the parameter value.
+
+The key parts are combined using the configured `KeyPartCombiner`. The `StandardKeyPartCombiner` joins all the parts separated with a `-` (dash).
+
