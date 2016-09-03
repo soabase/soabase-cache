@@ -22,6 +22,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
+/**
+ * Mark a method as having it's return value cached
+ */
 public @interface Cache
 {
 }

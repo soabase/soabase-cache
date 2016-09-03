@@ -15,33 +15,11 @@
  */
 package io.soabase.cache;
 
-import java.util.Random;
-
-public class MockControllerImpl implements MockController
+public class Special implements CacheKeyAccessor
 {
-    private final Random random = new Random();
-
     @Override
-    public long getValue()
+    public String getCacheKey()
     {
-        return random.nextLong();
-    }
-
-    @Override
-    public long makeValue(int plus)
-    {
-        return random.nextLong() + plus;
-    }
-
-    @Override
-    public int getSpecial(Special special)
-    {
-        return 0;
-    }
-
-    @Override
-    public void clear()
-    {
-        // NOP
+        return "something else";
     }
 }

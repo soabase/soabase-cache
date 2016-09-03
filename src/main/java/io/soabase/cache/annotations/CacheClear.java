@@ -22,6 +22,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
+/**
+ * Mark a method as clearing the cache
+ */
 public @interface CacheClear
 {
 }

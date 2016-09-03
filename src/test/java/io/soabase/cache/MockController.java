@@ -29,4 +29,8 @@ public interface MockController
 
     @CacheClear
     void clear();
+
+    @Cache()
+    @CacheKey("hey")
+    int getSpecial(@CacheKey("there") Special special);
 }

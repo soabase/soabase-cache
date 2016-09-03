@@ -16,7 +16,16 @@
 package io.soabase.cache;
 
 @FunctionalInterface
+/**
+ * To get the value of a method parameter, String.valueOf() is called. However, the object can implement
+ * CacheKeyAccessor to provide a custom key value.
+ */
 public interface CacheKeyAccessor
 {
+    /**
+     * Return the current cache key part
+     *
+     * @return current cache key part
+     */
     String getCacheKey();
 }

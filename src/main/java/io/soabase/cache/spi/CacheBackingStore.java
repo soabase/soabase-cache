@@ -19,9 +19,24 @@ import java.util.concurrent.Callable;
 
 public interface CacheBackingStore
 {
+    /**
+     * Return either the cached value or the value returned by <code>valueLoader</code>.
+     *
+     * @param key the cache key
+     * @param valueLoader functor to get the current value
+     * @return cached value or current loaded value
+     */
     <T> T get(String key, Callable<? extends T> valueLoader);
 
+    /**
+     * Remove the give key from the cache
+     *
+     * @param key cache key
+     */
     void invalidate(String key);
 
+    /**
+     * Remove all objects from the cache
+     */
     void invalidateAll();
 }

@@ -22,6 +22,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
+/**
+ * Change how the cache key is generated for the annotated part
+ */
 public @interface CacheKey
 {
     String value() default "";
