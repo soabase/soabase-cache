@@ -32,6 +32,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Utility to build cache controllers/proxies
@@ -94,6 +95,30 @@ public class CachingControllerBuilder
             return method.invoke(parentController, args);
         };
         return Reflection.newProxy(iface, handler);
+    }
+
+    /**
+     * Generate key parts
+     *
+     * @param clazz the proxy interface type
+     * @param methodName cache method (name must be unique in the class)
+     * @param arguments method arguments
+     * @return key parts
+     */
+    public static List<KeyPart> getKeyParts(Class<?> clazz, String methodName, Object... arguments)
+    {
+        clazz = Preconditions.checkNotNull(clazz, "clazz cannot be null");
+        CacheKey classCacheKey = clazz.getAnnotation(CacheKey.class);
+        List<Method> foundMethods = Arrays.stream(clazz.getDeclaredMethods()).filter(m -> m.getName().equals(methodName)).collect(Collectors.toList());
+        if ( foundMethods.size() == 0 )
+        {
+            throw new IllegalArgumentException("No method found named: " + methodName);
+        }
+        if ( foundMethods.size() > 1 )
+        {
+            throw new IllegalArgumentException("Multiple methods found named: " + methodName);
+        }
+        return getKeyParts(classCacheKey, foundMethods.get(0), arguments);
     }
 
     /**
